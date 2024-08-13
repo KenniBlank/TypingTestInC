@@ -78,7 +78,7 @@ int main()
         free(result_sentence.words);
         free(result_usrSentence.words);
 
-        printf("Type:\n");
+        printf("\nType:\n");
     }
     fclose(file);
     printf("\n");
