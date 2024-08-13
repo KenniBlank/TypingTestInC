@@ -16,6 +16,8 @@ typedef struct{
 
 
 void intro();
+int countLines(FILE *file);
+char* getRandomLine(FILE *file, int lineNumber, char *buffer, int bufferSize);
 void delay(float secs);
 WordBreakDown wordBreakdownFunction(char* sentence);
 int compare(WordBreakDown value, WordBreakDown usrValue);
@@ -36,15 +38,23 @@ int main()
     intro();
 
     // Main Program Logic:
+    srand(time(NULL));
+    int totalLines = countLines(file);
+    if (totalLines == 0) {
+        printf("The file is empty.\n");
+        fclose(file);
+        return 1;
+    }
+    int randomLine = rand() % totalLines;
     char sentence[sentenceSize];
 
-    while(fgets(sentence, sentenceSize, file))
+    while(1) // Fancy way of saying true. I am a cool programmer :)
     {
-        printf("%s", sentence);
+        int randomLine = rand() % totalLines;
+        if (getRandomLine(file, randomLine, sentence, sizeof(sentence)))
+            printf("%s", sentence);
         for (int i = 0; i <= strlen(sentence); i++)
-        {
             printf("-");
-        }
         printf("\n");
 
         char userSentence[sentenceSize];
@@ -77,14 +87,67 @@ int main()
             free(result_usrSentence.words[i]);
         free(result_sentence.words);
         free(result_usrSentence.words);
-
-        printf("\nType:\n");
+        system("clear");
+        printf("Next Type:\n");
     }
     fclose(file);
     printf("\n");
     return 0;
 }
 
+void intro()
+{
+    system("clear");
+    printf("%d sec typing test:\n", _time_);
+    delay(0.5f);
+    printf("Press \"Enter\" Button to Start");
+    scanf("%*c"); // waiting for new line: nice implementation right!    
+    printf("Starting in: ...\n");
+    printf("Starting in: 3\n");
+    delay(1.0f);
+    printf("Starting in: 2\n");
+    delay(1.0f);
+    printf("Starting in: 1\n");
+    delay(1.0f);
+    printf("GO!!!\n");
+    delay(0.1f);
+    system("clear");
+    printf("Type:\n");
+}
+int countLines(FILE *file) 
+{
+    int count = 0;
+    char c;
+    while ((c = fgetc(file)) != EOF) 
+    {
+        if (c == '\n') 
+            count++;
+    }
+    return count;
+}
+
+char* getRandomLine(FILE *file, int lineNumber, char *buffer, int bufferSize) 
+{
+    rewind(file);  // Reset the file pointer to the beginning
+    int currentLine = 0;
+    while (fgets(buffer, bufferSize, file)) 
+    {
+        if (currentLine == lineNumber)
+            return buffer;
+        currentLine++;
+    }    
+    return NULL;
+}
+
+void delay(float secs)
+{
+    // Convert seconds to the equivalent number of clock ticks
+    clock_t start_time = clock(); // Miracle by timer.h header XD.
+    clock_t delay_time = (clock_t)(secs * CLOCKS_PER_SEC);
+
+    // Wait until the required time has passed
+    while (clock() < start_time + delay_time);
+}
 WordBreakDown wordBreakdownFunction(char sentence[]) {
     const char delimiters[] = " .;!?";
     WordBreakDown result;
@@ -130,36 +193,6 @@ int compare(WordBreakDown value, WordBreakDown usrValue)
         }
     }
     return tempValue;
-}
-
-void intro()
-{
-    system("clear");
-    printf("%d sec typing test:\n", _time_);
-    delay(0.5f);
-    printf("Press \"Enter\" Button to Start");
-    scanf("%*c"); // waiting for new line: nice implementation right!    
-    printf("Starting in: ...\n");
-    printf("Starting in: 3\n");
-    delay(1.0f);
-    printf("Starting in: 2\n");
-    delay(1.0f);
-    printf("Starting in: 1\n");
-    delay(1.0f);
-    printf("GO!!!\n");
-    delay(0.1f);
-    system("clear");
-    printf("Type:\n");
-}
-
-void delay(float secs)
-{
-    // Convert seconds to the equivalent number of clock ticks
-    clock_t start_time = clock(); // Miracle by timer.h header XD.
-    clock_t delay_time = (clock_t)(secs * CLOCKS_PER_SEC);
-
-    // Wait until the required time has passed
-    while (clock() < start_time + delay_time);
 }
 
 void outro(int result, time_t start_time, time_t current_time)
