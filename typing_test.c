@@ -91,7 +91,6 @@ int main()
         printf("Next Type:\n");
     }
     fclose(file);
-    printf("\n");
     return 0;
 }
 
