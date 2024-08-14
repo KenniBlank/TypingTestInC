@@ -8,6 +8,7 @@ const int sentenceSize = 100;
 const int _time_ = 60;
 #define MAX_WORDS_IN_SENTENCE 100
 double elapsed_time;
+int errorInTypingWords = 0;
 
 typedef struct{
     int wordCount;
@@ -187,9 +188,9 @@ int compare(WordBreakDown value, WordBreakDown usrValue)
     for(int i = 0; i < usrValue.wordCount; i++)
     {
         if (strcmp(value.words[i], usrValue.words[i]) == 0)
-        {
             tempValue++;
-        }
+        else
+            errorInTypingWords++;
     }
     return tempValue;
 }
@@ -202,9 +203,11 @@ void outro(int result, time_t start_time, time_t current_time)
         1 sec = 42/x
         60 sec = 42/x *60
     */
+    system("clear");
     elapsed_time = difftime(current_time, start_time);
     int accurateResult = (int)(((float)(result) / elapsed_time) * 60);
-    printf("You typed at the speed of %d word per minute\n", accurateResult);
+    float accuracy = 100 - ((float)errorInTypingWords / (result + errorInTypingWords)) * 100;
+    printf("You typed at the speed of %d words per minute with accuracy of %.2f%%\n", accurateResult, accuracy);
     printf("Press \"R\" to retry OR Press any other key to Exit.\n");
     char choice = getchar();
     if (choice == 'R' || choice == 'r') {
