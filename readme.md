@@ -4,8 +4,8 @@ VIDEO Visualization: [YT](https://youtu.be/9x4T1kilJW8)
 
 # Installation Steps:
 On Linux:   
-    1. Install the typing_test.deb
-    2. Open Terminal and type: ***typing_test*** to execute.
+    1. Install the typing_test.deb  
+    2. Open Terminal and type: ***typing_test*** to execute.  
 On windows: Open the typing_test.exe
 
 ## Why?
