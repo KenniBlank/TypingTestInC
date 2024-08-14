@@ -2,6 +2,12 @@
 This program is my approach to creating a **Typing Test**. It is implemented in pure C, utilizing only the standard library with minimal external dependencies. It has only **Paragrams** which I wanted. Also the program doesn't end without letting you complete the sentence (The extra time is used while calculating the WPM(Word Per Minute)).
 VIDEO Visualization: [YT](https://youtu.be/9x4T1kilJW8)
 
+# Installation Steps:
+On Linux:   
+    1. Install the typing_test.deb
+    2. Open Terminal and type: ***typing_test***
+On windows: Open the typing_test.exe
+
 ## Why?
 I was dissatisfied with how new sentences were displayed in various typing tests, so I decided to create my own version that suits my preferences. This program features a minimal Command-Line Interface (CLI) that I like, and I can modify it to meet my specific needs.
 
