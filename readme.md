@@ -3,10 +3,10 @@ This program is my approach to creating a **Typing Test**. It is implemented in 
 VIDEO Visualization: [YT](https://youtu.be/9x4T1kilJW8)
 
 # Installation Steps:
-On Linux:   
-    1. Install the typing_test.deb  
-    2. Open Terminal and type: ***typing_test*** to execute.  
-On windows: Open the typing_test.exe
+- On Linux:   
+    - Install the typing_test.deb  
+    - Open Terminal and type: ***typing_test*** to execute.  
+- On windows: Open the typing_test.exe
 
 ## Why?
 I was dissatisfied with how new sentences were displayed in various typing tests, so I decided to create my own version that suits my preferences. This program features a minimal Command-Line Interface (CLI) that I like, and I can modify it to meet my specific needs.
