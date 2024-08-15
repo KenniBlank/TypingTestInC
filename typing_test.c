@@ -88,8 +88,12 @@ int main()
             free(result_usrSentence.words[i]);
         free(result_sentence.words);
         free(result_usrSentence.words);
-        system("clear");
-        printf("Next Type:\n");
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
+        printf("Next Sentence To Type:\n");
     }
     fclose(file);
     return 0;
@@ -97,7 +101,11 @@ int main()
 
 void intro()
 {
-    system("clear");
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
     printf("%d sec typing test:\n", _time_);
     delay(0.5f);
     printf("Press \"Enter\" Button to Start");
@@ -111,7 +119,11 @@ void intro()
     delay(1.0f);
     printf("GO!!!\n");
     delay(0.1f);
-    system("clear");
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
     printf("Type:\n");
 }
 int countLines(FILE *file) 
@@ -203,7 +215,11 @@ void outro(int result, time_t start_time, time_t current_time)
         1 sec = 42/x
         60 sec = 42/x *60
     */
-    system("clear");
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
     elapsed_time = difftime(current_time, start_time);
     int accurateResult = (int)(((float)(result) / elapsed_time) * 60);
     float accuracy = 100 - ((float)errorInTypingWords / (result + errorInTypingWords)) * 100;
